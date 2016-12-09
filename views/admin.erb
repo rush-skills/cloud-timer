@@ -1,0 +1,79 @@
+<section class="hero is-dark is-fullheight">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <div class="columns is-mobile is-vcentered">
+        <div class="column is-10">
+          <h1 class="title is-1">
+            Time Remaining:
+          </h1>
+          <h2 class="subtitle countdown">
+            00:00
+          </h2>
+        </div>
+        <div class="column">
+          <div class="control is-grouped-vertical">
+            <p class="control">
+              <a id="start" class="button is-success">
+                <span class="icon is-small">
+                  <i class="fa fa-play"></i>
+                </span>
+              </a>
+            </p>
+            <p class="control">
+              <a id="pause" class="button is-info">
+                <span class="icon is-small">
+                  <i class="fa fa-pause"></i>
+                </span>
+              </a>
+            </p>
+            <p class="control">
+              <a id="undo" class="button is-warning">
+                <span class="icon is-small">
+                  <i class="fa fa-undo"></i>
+                </span>
+              </a>
+            </p>
+            <p class="control">
+              <a id="reset" class="button is-danger">
+                <span class="icon is-small">
+                  <i class="fa fa-times"></i>
+                </span>
+              </a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <p style="margin-top: 1em;">&nbsp;</p>
+      <div class="buttons-wrapper columns">
+        <div class="column is-10">
+          <a class="add-min button is-large is-success" data-min="1">1 min</a>
+          <a class="add-min button is-large is-success" data-min="2">2 min</a>
+          <a class="add-min button is-large is-success" data-min="5">5 min</a>
+          <br><br>
+          <a class="add-min button is-large is-success" data-min="10">10 min</a>
+          <a id="custom" class="button is-large is-success">Custom</a>
+
+          <div id="addform" class="hide form-wrapper control is-horizontal">
+            <div class="control is-grouped">
+              <p class="control is-expanded">
+                <input id="min" class="input" type="number" min="0" max="100" step="1" placeholder="Minutes">
+              </p>
+              <p class="control is-expanded">
+                <input id="sec" class="input" type="number" min="0" max="59" step="1" placeholder="Seconds">
+              </p>
+              <p class="control">
+                <button id="set" class="button is-primary">Set</button>
+              </p>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </div>
+  </div>
+  <% if @image %>
+    <div class="hero-foot">
+      <img src="<%= @image %>" style="height:30px">
+    </div>
+  <% end %>
+</section>

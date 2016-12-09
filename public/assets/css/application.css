@@ -2,3 +2,20 @@
   overflow: auto;
   height: 500px;
 }
+.hide{
+	display: none !important;
+}
+.countdown{
+	font-size: 10em;
+}
+@media (max-width:480px) {
+	.countdown{
+		font-size: 6em;
+	}
+}
+.form-wrapper{
+	width: 400px;
+	text-align: center;
+	margin: 0 auto;
+	margin-top: 20px;
+}

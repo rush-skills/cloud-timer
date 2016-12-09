@@ -1,0 +1,35 @@
+<section class="default hero is-dark is-fullheight">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1">
+        Time Remaining:
+      </h1>
+      <h2 class="subtitle countdown">
+        00:00
+      </h2>
+    </div>
+  </div>
+  <% if @image %>
+    <div class="hero-foot">
+      <img src="<%= @image %>" style="height:30px">
+    </div>
+  <% end %>
+</section>
+
+<section class="finished hero is-danger is-fullheight hide">
+  <div class="hero-body">
+    <div class="container has-text-centered">
+      <h1 class="title is-1">
+        Tiden er ute
+      </h1>
+      <h2 class="subtitle is-3">
+        Time's up!
+      </h2>
+    </div>
+  </div>
+  <% if @image %>
+    <div class="hero-foot">
+      <img src="<%= @image %>" style="height:30px">
+    </div>
+  <% end %>
+</section>
