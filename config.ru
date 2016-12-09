@@ -1,6 +1,6 @@
 require './app'
-require './middlewares/chat_backend'
+require './middlewares/timer_backend'
 
-use ChatDemo::ChatBackend
+use CloudTimer::TimerBackend
 
-run ChatDemo::App
+run CloudTimer::App

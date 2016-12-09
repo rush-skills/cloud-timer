@@ -4,10 +4,10 @@ require 'redis'
 require 'json'
 require 'erb'
 
-module ChatDemo
-  class ChatBackend
+module CloudTimer
+  class TimerBackend
     KEEPALIVE_TIME = 15 # in seconds
-    CHANNEL        = "chat-demo"
+    CHANNEL        = "cloud-timer"
 
     def initialize(app)
       @app     = app
