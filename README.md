@@ -6,7 +6,7 @@ This is an application that allows users to create their own cloud-synced countd
 
 Made with [faye-websocket](https://github.com/faye/faye-websocket-ruby), [Puma](https://github.com/puma/puma), and [Sinatra](https://github.com/sinatra/sinatra).
 
-Check out the [live demo](http://ruby-websockets-chat.herokuapp.com/).
+Check out the [live demo](http://meetingtimer.herokuapp.com/).
 
 Code is based on the [ruby websockets chat demo by Heroku](https://github.com/heroku-examples/ruby-websockets-chat-demo).
 
