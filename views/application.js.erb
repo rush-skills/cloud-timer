@@ -1,18 +1,26 @@
-var uri      = "ws://" + window.document.location.host + "/";
+var scheme   = "<%= @scheme %>";
+var uri      = scheme + window.document.location.host + "/";
 var ws       = new WebSocket(uri);
 var lastTime = 10;
-
+var first = true;
 ws.onmessage = function(message) {
   var data = JSON.parse(message.data);
-  if(data.action == 'start'){
-    CountDown.Start(data.time);
-  }
-  else if(data.action == "pause"){
-    if ($(".admin")[0]){
-      // console.log(data);
-    }
-    else{
+  if(first)
+  {
+    if(data.action == 'start'){
       CountDown.Start(data.time);
+      first = false;
+    } 
+  }
+  if ($(".admin")[0]){
+    // console.log(data);
+  }
+  else{
+    if(data.action == 'start'){
+      CountDown.Start(data.time);
+    } 
+    else if(data.action == "pause"){
+      // CountDown.Start(data.time);
       CountDown.Pause();
     }
   }
@@ -31,16 +39,20 @@ $(document).on('click', "#custom", function(){
 });
 
 $(document).on('click', "#start", function(){
-  ws.send(JSON.stringify({ action: 'start', time: (parseInt(getTime())+1) }));
+  var t = getTime()
+  CountDown.Start(t);
+  ws.send(JSON.stringify({ action: 'start', time: t}));
 });
 $(document).on('click', "#pause", function(){
+  var t = getTime()
   CountDown.Pause();
-  ws.send(JSON.stringify({ action: 'pause', time: (parseInt(getTime())+1)}));
+  ws.send(JSON.stringify({ action: 'pause', time: t}));
 });
 $(document).on('click', "#reset", function(){
   CountDown.Reset();
 });
 $(document).on('click', "#undo", function(){
+  CountDown.Start(lastTime);
   ws.send(JSON.stringify({ action: 'start', time: lastTime}));
   // CountDown.Pause();
 });
