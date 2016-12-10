@@ -4,10 +4,18 @@ var lastTime = 10;
 
 ws.onmessage = function(message) {
   var data = JSON.parse(message.data);
-  $("#chat-text").append("<div class='panel panel-default'><div class='panel-heading'>" + data.handle + "</div><div class='panel-body'>" + data.text + "</div></div>");
-  $("#chat-text").stop().animate({
-    scrollTop: $('#chat-text')[0].scrollHeight
-  }, 800);
+  if ($(".admin")[0]){
+    console.log(data);
+  }
+  else{
+    if(data.action == 'start'){
+      CountDown.Start(parseInt(data.time));
+    }
+    else{
+      CountDown.Start(parseInt(data.time)+1);
+      CountDown.Pause();
+    }
+  }
 };
 
 $("#input-form").on("submit", function(event) {
@@ -24,16 +32,19 @@ $(document).on('click', "#custom", function(){
 
 $(document).on('click', "#start", function(){
   CountDown.Start(getTime());
+  ws.send(JSON.stringify({ action: 'start', time: getTime() }));
 });
 $(document).on('click', "#pause", function(){
   CountDown.Pause();
+  ws.send(JSON.stringify({ action: 'pause', time: getTime()}));
 });
 $(document).on('click', "#reset", function(){
   CountDown.Reset();
 });
 $(document).on('click', "#undo", function(){
   CountDown.Start(lastTime);
-  CountDown.Pause();
+  ws.send(JSON.stringify({ action: 'start', time: lastTime}));
+  // CountDown.Pause();
 });
 
 $(document).on('click', ".add-min", function(){
