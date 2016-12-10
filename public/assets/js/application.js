@@ -4,15 +4,15 @@ var lastTime = 10;
 
 ws.onmessage = function(message) {
   var data = JSON.parse(message.data);
-  if ($(".admin")[0]){
-    console.log(data);
+  if(data.action == 'start'){
+    CountDown.Start(data.time);
   }
-  else{
-    if(data.action == 'start'){
-      CountDown.Start(parseInt(data.time));
+  else if(data.action == "pause"){
+    if ($(".admin")[0]){
+      // console.log(data);
     }
     else{
-      CountDown.Start(parseInt(data.time)+1);
+      CountDown.Start(data.time);
       CountDown.Pause();
     }
   }
@@ -31,18 +31,16 @@ $(document).on('click', "#custom", function(){
 });
 
 $(document).on('click', "#start", function(){
-  CountDown.Start(getTime());
-  ws.send(JSON.stringify({ action: 'start', time: getTime() }));
+  ws.send(JSON.stringify({ action: 'start', time: (parseInt(getTime())+1) }));
 });
 $(document).on('click', "#pause", function(){
   CountDown.Pause();
-  ws.send(JSON.stringify({ action: 'pause', time: getTime()}));
+  ws.send(JSON.stringify({ action: 'pause', time: (parseInt(getTime())+1)}));
 });
 $(document).on('click', "#reset", function(){
   CountDown.Reset();
 });
 $(document).on('click', "#undo", function(){
-  CountDown.Start(lastTime);
   ws.send(JSON.stringify({ action: 'start', time: lastTime}));
   // CountDown.Pause();
 });
@@ -95,6 +93,10 @@ var CountDown = (function ($) {
         // Countdown if running
         if( Running ) {
             TimeOut -= 1;
+            if ($(".admin")[0]){
+              if(ws.readyState==1)
+                ws.send(JSON.stringify({ action: 'update', time: getTime()}))
+            }
             if( TimeOut <= 0 ) {
                 TimeOut = 0;
                 changeCountdownState();
