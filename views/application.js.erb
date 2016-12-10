@@ -71,6 +71,7 @@ $(document).on('click', "#set", function(){
   mins = parseInt($("input#min").val());
   secs = parseInt($("input#sec").val());
   time = (mins*60)+secs;
+  lastTime = getTime();
   CountDown.Start(time);
   CountDown.Pause();
 });
